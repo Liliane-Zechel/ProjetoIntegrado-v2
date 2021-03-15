@@ -1,16 +1,18 @@
 @extends('layouts.app')
+@section('title', 'Clientes')
 @section('content')
-  <div class="card">
-    <div class="card-header">
-        Clientes
-    </div>
+<div class="col-12">
+    <div class="card">
+        <div class="card-header bg-success text-white">
+            Clientes
+        </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-12 text-right">
                     <a href="{{route('customers.create')}}" class="btn btn-success">Novo Cliente</a>
                 </div>
 
-                <div class="col-10 mt-4">
+                <div class="col-12 mt-4">
                     <table class="table table-hover">
                         <thead class="thead-dark">
                             <tr>
@@ -32,9 +34,10 @@
                             </tr>
                             @endforeach
                         </tbody>
-                    </table> 
-                </div>  
+                    </table>
+                </div>
             </div>
         </div>
     </div>
+</div>
 @endsection

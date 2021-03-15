@@ -23,7 +23,6 @@
                 <label>Senha</label>
                 <input type="password" name="password" class="form-control">
             </div>
-            </form>
 
             <div class="form-group">
                 <label>Confirmar Senha</label>
@@ -36,8 +35,8 @@
                     <option {{old ('role', '') == 'admin' ? 'selected' : ''}} value='admin'>
                         Administrador
                     </option>
-                    <option {{old('role', '') == 'operador' ? 'selected' : ''}} value='operador'>
-                        Operador
+                    <option {{old('role', '') == 'agricult' ? 'selected' : ''}} value='agricult'>
+                        Agricultor
                     </option>
                 </select>
             </div>

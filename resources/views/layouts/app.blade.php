@@ -1,75 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produtor Orgânico</title>
-    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-
-
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>PROJETOINTEGRADO - @yield('title')</title>
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">ProdutorOrgânico</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-          <a class="nav-item nav-link" href="{{route ('dashboard.index') }}">Dashboard</a>
-          <a class="nav-item nav-link" href="{{route ('produtos.index') }}">Produtos</a>
-          @if(auth()->user()->role == 'admin')
-            <a class="nav-item nav-link" href="{{route ('users.index') }}">Usuários</a>
-          @endif
-      </div>
-    </div>
-    <div class="d-flex align-items-center">
-        <span class="nav-item nav-link">{{auth()->user()->name}}</span>
-        <div>|</div>
-        <a class="nav-item nav-link" href="{{route('login.logout')}}">Sair</a>
-    </div>
-  </nav>
-
-<div class="container my-5">
-
-        @if($errors->any())
-        <div class="row" mt="4" mb="4">
-          <div class="col-12">
-            <div class="alert alert-danger" role="alert">
-              @foreach($errors->all() as $error)
-                <div>{{$error}}</div>
-              @endforeach
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <a class="navbar-brand" href="index.html">Produtor Orgânico</a>
+        <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+        <!-- Navbar Search-->
+        <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
+                </div>
             </div>
-          </div>
-        </div>
-        @endif
+        </form>
+        <!-- Navbar-->
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user fa-fw"></i>
+                    {{ auth()->user()->name }}
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="{{route('login.logout')}}">
+                        Sair
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Core</div>
+                        <a class="nav-link" href="{{ route('dashboard.index') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Dashboard
+                        </a>
 
-    @if(session()->has('msg_success'))
-    <div class="row" mt="4" mb="4">
-      <div class="col-10">
-        <div class="alert alert-success" role="alert">
-          {{session()->get('msg_success')}}
+                        <a class="nav-link" href="{{ route('users.store') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                            Usuários
+                        </a>
+
+                        <a class="nav-link" href="{{ route('customers.store') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                            Clientes
+                        </a>
+
+                        <a class="nav-link" href="{{ route('produtos.store') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Produtos
+                        </a>
+
+                        <a class="nav-link" href="{{ route('vendas.store') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Vendas
+                        </a>
+
+                        <a class="nav-link" href="{{ route('engana_ga.store') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Egana_Ga
+                        </a>
+
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <!-- <div class="d-flex align-items-center">
+                    <img width="20px" src="{{ asset('img/if.png') }}">
+                    </div>-->
+                </div>
+            </nav>
         </div>
-      </div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid">
+                <h1 class="mt-4">@yield('title')</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                    <div class="row">
+
+
+                        @if($errors->any())
+                        <div class="row" mt="4" mb="4">
+                            <div class="col-12">
+                                <div class="alert alert-danger" role="alert">
+                                    @foreach($errors->all() as $error)
+                                    <div>{{$error}}</div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+
+                        @if(session()->has('msg_success'))
+                        <div class="row" mt="4" mb="4">
+                            <div class="col-10">
+                                <div class="alert alert-success" role="alert">
+                                    {{session()->get('msg_success')}}
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+
+                        @if(session()->has('msg_error'))
+                        <div class="row" mt="4" mb="4">
+                            <div class="col-10">
+                                <div class="alert alert-danger" role="alert">
+                                    {{session()->get('msg_error')}}
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+
+
+
+                        @yield('content')
+                    </div>
+                </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Todos os direitos reservados &copy; ProjetoIntegrado 2021</div>
+                        <div>
+                            Desenvolvido por:
+                            <a target="_blank" href="https://github.com/Liliane-Zechel">Em dupla Com Petter Paul</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
     </div>
-    @endif
 
-    @if(session()->has('msg_error'))
-    <div class="row" mt="4" mb="4">
-      <div class="col-10">
-        <div class="alert alert-danger" role="alert">
-          {{session()->get('msg_error')}}
-        </div>
-      </div>
-    </div>
-    @endif
 
-    @yield('content')
-  </div>
-<script src="{{asset('js/jquery-3.5.1.min.js')}}"></script>
-<script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
-<script type="text/javascript" src="{{ asset('js/jquery.mask.min.js') }}"></script>
-    @yield('scripts')
+    <script src="{{ asset('js/scripts.js') }}"></script>
+    <script src="{{asset('js/jquery-3.5.1.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.mask.min.js') }}"></script>
+    @yield('js')
+
 </body>
+
 </html>

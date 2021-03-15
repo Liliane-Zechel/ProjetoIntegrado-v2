@@ -36,34 +36,32 @@
         <div class="col-12 col-sm-2">
             <div class="form-group">
                 <label>CEP</label>
-                <input type="text" name="address[cep]" class="form-control" value="{{old('address.cep', '')}}">
+                <input type="text" name="address[cep]" class="form-control" id="cep" value="{{old('address.cep', '')}}">
             </div>
-            </form>
-
-
         </div>
         <div class="col-12 col-sm-5">
             <div class="form-group">
                 <label>Cidade</label>
-                <input type="text" name="address[city]" class="form-control">
+                <input type="text" name="address[city]"  class="form-control" id="city">
             </div>
         </div>
         <div class="col-12 col-sm-1">
             <div class="form-group">
                 <label>UF</label>
-                <input type="text" name="address[uf]" class="form-control">
+                <input type="text" name="address[uf]" class="form-control" id="uf">
             </div>
         </div>
         <div class="col-12 col-sm-4">
             <div class="form-group">
                 <label>Bairro</label>
-                <input type="text" name="address[district]" class="form-control">
+                <input type="text" name="address[district]" class="form-control" id="district">
             </div>
         </div>
         <div class="col-12 col-sm-7">
             <div class="form-group">
                 <label>Logradouro</label>
-                <input type="text" name="address[street]" class="form-control" value="{{old('address.street', '')}}">
+                <input type="text" name="address[street]" class="form-control" id="street"
+                value="{{old('address.street', '')}}">
             </div>
         </div>
         <div class="col-12 col-sm-1">
@@ -75,7 +73,7 @@
         <div class="col-12 col-sm-4">
             <div class="form-group">
                 <label>Complemento</label>
-                <input type="text" name="address[complement]" class="form-control">
+                <input type="text" name="address[complement]"  class="form-control">
             </div>
         </div>
     </div>
@@ -92,8 +90,6 @@
                 <label>Telefone</label>
                 <input type="text" name="phones[0][number]" class="form-control" value="{{old('phone.0.number', '')}}">
             </div>
-            </form>
-
         </div>
         <div class="col-12 col-sm-4">
             <div class="form-group">
@@ -115,3 +111,28 @@
 
 </form>
 @endsection
+
+@section('js')
+<Script>
+$(document).on('blur', '#cep', function() {
+  let cep = $(this).val();
+
+  $.ajax({
+       url: 'https://viacep.com.br/ws/'+cep+'/json/',
+      method: 'GET',
+      dataType: 'json',
+
+      success: function(data) {
+     $('#city').val(data.localidade);
+     $('#uf').val(data.uf);
+     $('#district').val(data.bairro);
+    $('#street').val(data.logradouro);
+
+      }
+
+  });
+
+});
+</Script>
+@endsection
+

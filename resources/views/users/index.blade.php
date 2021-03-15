@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Usuários')
 @section('content')
   <div class="card">
     <div class="card-header">
@@ -30,8 +31,8 @@
                             </tr>
                             @endforeach
                         </tbody>
-                    </table> 
-                </div>  
+                    </table>
+                </div>
             </div>
         </div>
     </div>

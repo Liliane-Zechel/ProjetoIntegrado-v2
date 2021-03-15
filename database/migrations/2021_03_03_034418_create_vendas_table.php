@@ -15,7 +15,13 @@ class CreateVendasTable extends Migration
     {
         Schema::create('vendas', function (Blueprint $table) {
             $table->id();
+            $table->date('return_date'); //data permitida para troca da compra
+            $table->unsignedBigInteger('user_id'); //agricultor
+            $table->unsignedBigInteger('customer_id'); //cliente que efetuou a compra
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('customer_id')->references('id')->on('customers');
         });
     }
 

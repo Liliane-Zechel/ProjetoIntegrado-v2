@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProdutoVendaTable extends Migration
+class CreateEnganaGaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateProdutoVendaTable extends Migration
      */
     public function up()
     {
-        Schema::create('produto_venda', function (Blueprint $table) {
+        Schema::create('engana_ga', function (Blueprint $table) {
             $table->id();
+            $table->string('relatório');
+            $table->date('return_date');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateProdutoVendaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('produto_venda');
+        Schema::dropIfExists('engana_ga');
     }
 }
